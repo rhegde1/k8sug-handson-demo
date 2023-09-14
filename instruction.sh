@@ -88,7 +88,21 @@ kubectl get pods
 # port forward application
 kubectl port-forward hello-kubernetes-7f76b879bf-lt4l9 8080:8080 ---> replace hello-kubernetes-7f76b879bf-lt4l9 with your pod name
 
-# Test the hello world application locally using --> http://localhost:8080
+Test the hello world application locally using --> http://localhost:8080
+
+# Exposing the application with kubectl port-forward is an excellent way to test the app quickly, but it isn't a long-term solution.
+# If you wish to route live traffic to the Pod, you should have a more permanent solution.
+# In Kubernetes, you can use a Service of type: LoadBalancer to start up a load balancer to expose your Pods.
+
+kubectl apply -f ../yaml/service-loadbalancer.yaml
+kubectl get svc
+
+# The load balancer that you created earlier serves one service at a time.
+# Also, it has no option to provide intelligent routing based on paths.
+# So if you have multiple services that need to be exposed, you will need to create the same number of load balancers.
+# Imagine having ten applications that have to be exposed.
+# If you use a Service of type: LoadBalancer for each of them, you might end up with ten different L4 Load Balancers.
+
 
 # Update AKS cluster by adding one more node
 Update terraform code to add one more node using "node_count" flag
