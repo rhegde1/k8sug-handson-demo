@@ -1,3 +1,5 @@
+# Credit to learnk8s.io & learn.microsoft.com
+
 # Install terraform
 macOS "Install terraform" "brew install terraform"
 windowsOS "Install terraform" "choco install terraform"
